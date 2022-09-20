@@ -1,0 +1,23 @@
+<?php 
+require "../function.php";
+
+$id = $_GET["idgaleri"]; 
+
+if ( galeri1($id) ) {
+  echo "
+		<script>
+			alert('data berhasil dihapus!');
+			document.location.href = 'galeri.php';
+		</script>
+	";
+}else
+echo "
+		<script>
+			alert('data gagal dihapus!');
+			document.location.href = 'galeri.php';
+		</script>
+	";
+
+
+
+?>
