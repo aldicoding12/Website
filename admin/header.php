@@ -28,7 +28,7 @@ session_start();
             <?php } elseif ( $_SESSION["level"] == 'Admin' ) { ?>
             <li> <a href="jurusan.php">Jurusan</a> </li>
             <li> <a href="galeri.php">Galeri</a> </li>
-            <li> <a href="">Informasi</a> </li>
+            <li> <a href="informasi.php">Informasi</a> </li>
             <li>
                <a href="">Pengaturan</a> 
                 <ul class="dropdown">

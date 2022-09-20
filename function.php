@@ -63,6 +63,14 @@ function hapus($id) {
 
 function galeri1($id) {
   global $conn;
+  $result = mysqli_query($conn, "SELECT foto FROM galeri WHERE id = '$id'");
+  if ( mysqli_num_rows($result) > 0 ) {
+
+  $det = mysqli_fetch_assoc($result);
+    if ( file_exists("../upload/img/".$det["gambar"]) ) {
+      unlink("../upload/img/".$det["foto"]);
+    }
+  }
   mysqli_query($conn, "DELETE FROM galeri WHERE id = '$id'");
 
   return mysqli_affected_rows($conn);
@@ -73,6 +81,7 @@ function jurusan1($id) {
 
   $result = mysqli_query($conn, "SELECT gambar FROM jurusan WHERE id = '$id'");
   if ( mysqli_num_rows($result) > 0 ) {
+
   $det = mysqli_fetch_assoc($result);
     if ( file_exists("../upload/img/".$det["gambar"]) ) {
       unlink("../upload/img/".$det["gambar"]);
@@ -253,6 +262,42 @@ function ubahgaleri($data) {
             WHERE id = '$id'
   ";
   mysqli_query($conn, $query);
+  return mysqli_affected_rows($conn);
+}
+
+//Informasi
+function informasi($data) {
+	global $conn;
+
+  $judul = (htmlspecialchars($data["judul"]));
+  $keterangan=htmlspecialchars($data["keterangan"]);
+  $creat = date('Y-m-d H:i:s ');
+
+  $gambar = uplaod();
+  if ( !$gambar ) {
+    return false;
+  }
+
+  mysqli_query($conn, "INSERT INTO informasi VALUES('', '$judul', '$keterangan', '$gambar', '$creat', 'NULL', 'NULL'
+  )");
+
+  return mysqli_affected_rows($conn);
+
+}
+
+//delete Informasi
+function informasi1($id) {
+  global $conn;
+  $result = mysqli_query($conn, "SELECT gambar FROM jurusan WHERE id = '$id'");
+  if ( mysqli_num_rows($result) > 0 ) {
+
+  $det = mysqli_fetch_assoc($result);
+    if ( file_exists("../upload/img/".$det["gambar"]) ) {
+      unlink("../upload/img/".$det["gambar"]);
+    }
+  }
+  mysqli_query($conn, "DELETE FROM informasi WHERE id = '$id'");
+
   return mysqli_affected_rows($conn);
 }
 function uplaod() {
